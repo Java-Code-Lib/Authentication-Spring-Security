@@ -14,8 +14,12 @@
         Roles: <span sec:authentication="principal.authorities"></span>
     </p>
     <hr>
-    <p><a th:href="@{/leaders}">Leadership Meeting</a> - only for managers</p>
-    <p><a th:href="@{/systems}">Admin Portal</a> - only for admins</p>
+    <div sec:authorize="hasRole('MANAGER')">
+        <p><a th:href="@{/leaders}">Leadership Meeting</a> - only for managers</p>
+    </div>
+    <div sec:authorize="hasRole('ADMIN')">
+        <p><a th:href="@{/systems}">Admin Portal</a> - only for admins</p>
+    </div>
     <form action="#" th:action="@{/logout}" method="post">
         <div th:if="${param.logout}">
             <li>You have been logged out!</li>
